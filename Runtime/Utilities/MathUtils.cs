@@ -528,5 +528,40 @@ namespace Rascar.Toolbox.Utilities
             int newValueCount = oldValueCount - 1;
             average = newValueCount == 0 ? Vector3.zero : (average - value) / newValueCount;
         }
+
+        public static Quaternion SmoothDamp(Quaternion origin, Quaternion target, ref Quaternion deriv, float time)
+        {
+            if (Time.deltaTime < Mathf.Epsilon)
+            {
+                return origin;
+            }
+
+            // account for double-cover
+            float dot = Quaternion.Dot(origin, target);
+            float multi = dot > 0f ? 1f : -1f;
+
+            target.x *= multi;
+            target.y *= multi;
+            target.z *= multi;
+            target.w *= multi;
+
+            // smooth damp (nlerp approx)
+            Vector4 result = new Vector4
+            (
+                Mathf.SmoothDamp(origin.x, target.x, ref deriv.x, time),
+                Mathf.SmoothDamp(origin.y, target.y, ref deriv.y, time),
+                Mathf.SmoothDamp(origin.z, target.z, ref deriv.z, time),
+                Mathf.SmoothDamp(origin.w, target.w, ref deriv.w, time)
+            ).normalized;
+
+            // ensure deriv is tangent
+            Vector4 derivError = Vector4.Project(new Vector4(deriv.x, deriv.y, deriv.z, deriv.w), result);
+            deriv.x -= derivError.x;
+            deriv.y -= derivError.y;
+            deriv.z -= derivError.z;
+            deriv.w -= derivError.w;
+
+            return new Quaternion(result.x, result.y, result.z, result.w);
+        }
     }
 }
