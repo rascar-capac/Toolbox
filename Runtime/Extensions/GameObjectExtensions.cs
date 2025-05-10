@@ -1,3 +1,4 @@
+using Rascar.Toolbox.Utilities;
 using UnityEngine;
 
 namespace Rascar.Toolbox.Extensions
@@ -36,6 +37,11 @@ namespace Rascar.Toolbox.Extensions
             {
                 SetLayerRecursive(child.gameObject, layer);
             }
+        }
+
+        public static bool LayerIsInMask(this GameObject gameObject, LayerMask layerMask)
+        {
+            return BitUtils.BitMaskIndexIsTrue(layerMask, gameObject.layer);
         }
     }
 }
