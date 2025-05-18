@@ -18,8 +18,8 @@ namespace Rascar.Toolbox.Editor.PropertyDrawers
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             Rect localRectangle = position;
-            SerializedProperty minimumValueProperty = property.FindPropertyRelative("_MinimumValue");
-            SerializedProperty maximumValueProperty = property.FindPropertyRelative("_MaximumValue");
+            SerializedProperty minimumValueProperty = property.FindPropertyRelative("_minValue");
+            SerializedProperty maximumValueProperty = property.FindPropertyRelative("_maxValue");
 
             EditorGUI.BeginChangeCheck();
 
