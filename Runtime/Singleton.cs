@@ -30,7 +30,7 @@ namespace Rascar.Toolbox
             return instance != null;
         }
 
-        public virtual void Awake()
+        protected virtual void Awake()
         {
             if (!_destroyOnLoad)
             {
