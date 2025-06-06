@@ -13,8 +13,8 @@ namespace Rascar.Toolbox.Editor.PropertyDrawers
 
             string labelString = label.text;
 
-            SerializedProperty enabledProperty = property.FindPropertyRelative("_Enabled");
-            SerializedProperty valueProperty = property.FindPropertyRelative("_Value");
+            SerializedProperty enabledProperty = property.FindPropertyRelative("_enabled");
+            SerializedProperty valueProperty = property.FindPropertyRelative("_value");
 
             Rect enabledPropertyRect = position;
             enabledPropertyRect.height = EditorGUI.GetPropertyHeight(enabledProperty);
@@ -34,7 +34,7 @@ namespace Rascar.Toolbox.Editor.PropertyDrawers
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            SerializedProperty valueProperty = property.FindPropertyRelative("_Value");
+            SerializedProperty valueProperty = property.FindPropertyRelative("_value");
 
             return EditorGUI.GetPropertyHeight(valueProperty);
         }
